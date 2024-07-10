@@ -9,38 +9,49 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script defer src="main.js"></script>
     <style>
         /* Custom styles for the form */
         body {
-            background-color: #dfeaf5; /* Light gray background */
+            background-color: #dfeaf5;
+            /* Light gray background */
         }
 
         .card-header {
-            background-color: #4173a9; /* Blue header background */
-            color: #fff; /* White header text */
+            background-color: #4173a9;
+            /* Blue header background */
+            color: #fff;
+            /* White header text */
         }
 
         .card-body {
-            background-color: #fff; /* White card body background */
+            background-color: #ffffff;
+            /* White card body background */
         }
 
         .btn-primary {
-            background-color: #4173a9; /* Blue button background */
-            border-color: #4173a9; /* Blue button border */
+            background-color: #4173a9;
+            /* Blue button background */
+            border-color: #4173a9;
+            /* Blue button border */
         }
 
         .btn-primary:hover {
-            background-color: #4173a9; /* Darker blue on hover */
-            border-color: #4173a9;/* Darker blue on hover */
+            background-color: #4173a9;
+            /* Darker blue on hover */
+            border-color: #4173a9;
+            /* Darker blue on hover */
         }
 
         .table {
-            background-color: #fff; /* White table background */
+            background-color: #fff;
+            /* White table background */
         }
 
         .table th,
         .table td {
-            vertical-align: middle; /* Center-align table content */
+            vertical-align: middle;
+            /* Center-align table content */
         }
 
         .vacation-title {
@@ -49,31 +60,33 @@
         }
 
         .vacation-description {
-            margin-top: 10px;
+            margin-top: 5px;
             font-size: 0.9rem;
-            color: #6c757d; /* Gray text color */
+            color: #6c757d;
+            /* Gray text color */
         }
 
         .vacation-image {
             max-width: 100%;
             height: auto;
-            margin-top: 10px;
+            margin-top: 5px;
         }
     </style>
 </head>
 
 <body>
 
+
     <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-                <div class="card">
+        <div class="row">
+            <!-- Left column for choosing and viewing vacations -->
+            <div class="col-md-6">
+                <!-- Choose Vacation -->
+                <div class="card mb-4">
                     <div class="card-header">
-                        <h4 class="text-center">Add New Vacation</h4>
+                        <h4 class="text-center">Choose Vacation</h4>
                     </div>
-                    <div id="alerts" class="card-body">
-                        <!-- Alerts will be inserted here -->
-                    </div>
+                    <div id="alerts" class="card-body"></div>
                     <div class="card-body">
                         <form action="" method="post" id="countryForm">
                             <div class="form-group">
@@ -84,10 +97,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
+                <!-- Vacation Destination -->
                 <div class="card">
                     <div class="card-header">
                         <h4 class="text-center">Vacation Destination</h4>
@@ -95,20 +105,87 @@
                     <div class="card-body">
                         <div id="vacationContainer">
                             <!-- Vacation data will be inserted here -->
-                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right column for creating a vacation -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">Create Vacation</h4>
+                    </div>
+                    <div class="card-body ">
+                        <form id="createVacationForm">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" id="country" name="country" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="duration">Duration</label>
+                                <input type="text" class="form-control" id="duration" name="duration" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" id="price" name="price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="photos">Photos (comma separated URLs)</label>
+                                <input type="text" class="form-control" id="photos" name="photos" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4>Vacation List</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <table class="table table-striped">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Country</th>
+                                            <th>City</th>
+                                            <th>Duration</th>
+                                            <th>Price</th>
+                                            <th>Rating</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody id="tbody">
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        document.getElementById('countryForm').addEventListener('submit', function(event) {
+
+        document.getElementById('countryForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the form from submitting the traditional way
             const country = document.getElementById('country').value;
 
@@ -131,7 +208,7 @@
                             <div class="row">
 
                               <div class="col-md-6">
-                                    ${vacation.photos.map(photo => `<img src="${photo}" alt="Vacation Photo" width="300">`).join('')}
+                                    ${vacation.photos.map(photo => `<img src="${photo}" alt="Vacation Photo" width="180">`).join('')}
                              </div>
                                 <div class="col-md-6">
                                  <ul class="list-group">
@@ -143,9 +220,9 @@
                                 <p><strong>Rating:</strong> ${vacation.rating.join(', ')}</p>
                                 </ul>
                               </div>
-                          </div>
-
-                            `;
+                             </div>
+                             </div>
+                           `;
                             vacationContainer.appendChild(vacationElement);
                         });
                     }
@@ -154,7 +231,43 @@
                     console.error('Error fetching vacations:', error);
                 });
         });
+
+
+
+        function fetchVacations() {
+            fetch('http://127.0.0.1:8000/getVacations')
+                .then(response => response.json())
+                .then(vacations => {
+                    const tbody = document.getElementById('tbody');
+                    tbody.innerHTML = ''; // Clear any previous data
+
+                    vacations.forEach(vacation => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${vacation.title}</td>
+                            <td>${vacation.country}</td>
+                            <td>${vacation.city}</td>
+                            <td>${vacation.duration}</td>
+                            <td>$${vacation.price}</td>
+                            <td>${vacation.rating.join(', ')}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching vacations:', error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchVacations);
+
+        
     </script>
+
+    
+
+    
+
 
 </body>
 
